@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti mi amor</title>
+  <style>
+    body {
+      background-color: black;
+      color: yellow;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .gif-container {
+      display: none;
+    }
+    .gif-container.active {
+      display: block;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: yellow;
+      color: black;
+      cursor: pointer;
+    }
+    select {
+      margin: 20px;
+      padding: 5px;
+      font-size: 14px;
+    }
+    iframe {
+      width: 80%;
+      height: 315px;
+      margin-top: 20px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌻 Para ti mi amor 🌻</h1>
+
+  <div id="gif1" class="gif-container active">
+    <img src="gif1.gif" width="80%">
+  </div>
+  <div id="gif2" class="gif-container">
+    <img src="gif2.gif" width="80%">
+  </div>
+  <div id="gif3" class="gif-container">
+    <img src="gif3.gif" width="80%">
+  </div>
+
+  <button onclick="nextGif()">Continuar</button>
+
+  <br><br>
+
+  <label for="music">Elige una canción:</label>
+  <select id="music" onchange="changeMusic()">
+    <option value="">--Selecciona--</option>
+    <option value="https://www.youtube.com/embed/8gCKjzYcJRA">Floricienta - Flores Amarillas</option>
+    <option value="https://www.youtube.com/embed/CLhPp4t8K0g">Bewbom</option>
+    <option value="https://www.youtube.com/embed/oCvF04Vcbv8">Coqueta</option>
+  </select>
+
+  <div id="player"></div>
+
+  <script>
+    let currentGif = 1;
+    function nextGif() {
+      document.getElementById("gif" + currentGif).classList.remove("active");
+      currentGif++;
+      if (currentGif > 3) currentGif = 1;
+      document.getElementById("gif" + currentGif).classList.add("active");
+    }
+
+    function changeMusic() {
+      let url = document.getElementById("music").value;
+      if (url) {
+        document.getElementById("player").innerHTML = '<iframe src="' + url + '" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+      } else {
+        document.getElementById("player").innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>
