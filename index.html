@@ -5,78 +5,78 @@
   <title>Para ti mi amor</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: black;
       color: yellow;
-      text-align: center;
       font-family: Arial, sans-serif;
+      text-align: center;
     }
     .gif-container {
-      display: none;
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
     }
-    .gif-container.active {
+    .gif {
+      display: none;
+      width: 100%;
+      border-radius: 10px;
+    }
+    .active {
       display: block;
     }
-    button {
-      margin-top: 20px;
+    .btn {
+      margin: 15px;
       padding: 10px 20px;
-      font-size: 16px;
+      background-color: yellow;
+      color: black;
       border: none;
       border-radius: 8px;
-      background: yellow;
-      color: black;
+      font-size: 16px;
       cursor: pointer;
     }
-    select {
-      margin: 20px;
-      padding: 5px;
-      font-size: 14px;
+    .btn:hover {
+      background-color: orange;
     }
-    iframe {
-      width: 80%;
-      height: 315px;
+    .music {
       margin-top: 20px;
-      border: none;
     }
   </style>
 </head>
 <body>
-  <h1>🌻 Para ti mi amor 🌻</h1>
+  <h1>💛 Para ti mi amor 💛</h1>
+  <div class="gif-container">
+    <img src="Documento A4 Flores Amarillas Floral Moderno Amarillo (1).gif" class="gif active">
+    <img src="Tarjeta de Amor Collage Recortes Flores Amarillas Sencilla Amarilla.gif" class="gif">
+    <img src="Carta de Amor Flores Amarillas Acuarela Amarilla.gif" class="gif">
+  </div>
 
-<img src="Documento A4 Flores Amarillas Floral Moderno Amarillo (1).gif" class="gif active">
-<img src="Tarjeta de Amor Collage Recortes Flores Amarillas Sencilla Amarilla.gif" class="gif">
-<img src="Carta de Amor Flores Amarillas Acuarela Amarilla.gif" class="gif">
+  <button class="btn" onclick="nextGif()">Continuar</button>
 
+  <div class="music">
+    <h3>🎶 Elige una canción:</h3>
+    <button class="btn" onclick="playMusic('https://www.youtube.com/embed/G4R1C3OeLko?autoplay=1')">Floricienta - Flores Amarillas</button>
+    <button class="btn" onclick="playMusic('https://www.youtube.com/embed/9bZkp7q19f0?autoplay=1')">Bewbom</button>
+    <button class="btn" onclick="playMusic('https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1')">Coqueta</button>
+  </div>
 
-  <button onclick="nextGif()">Continuar</button>
-
-  <br><br>
-
-  <label for="music">Elige una canción:</label>
-  <select id="music" onchange="changeMusic()">
-    <option value="">--Selecciona--</option>
-    <option value="https://www.youtube.com/embed/8gCKjzYcJRA">Floricienta - Flores Amarillas</option>
-    <option value="https://www.youtube.com/embed/CLhPp4t8K0g">Bewbom</option>
-    <option value="https://www.youtube.com/embed/oCvF04Vcbv8">Coqueta</option>
-  </select>
-
-  <div id="player"></div>
+  <div id="player" style="margin-top:20px;"></div>
 
   <script>
-    let currentGif = 1;
+    let current = 0;
+    const gifs = document.querySelectorAll(".gif");
+
     function nextGif() {
-      document.getElementById("gif" + currentGif).classList.remove("active");
-      currentGif++;
-      if (currentGif > 3) currentGif = 1;
-      document.getElementById("gif" + currentGif).classList.add("active");
+      gifs[current].classList.remove("active");
+      current = (current + 1) % gifs.length;
+      gifs[current].classList.add("active");
     }
 
-    function changeMusic() {
-      let url = document.getElementById("music").value;
-      if (url) {
-        document.getElementById("player").innerHTML = '<iframe src="' + url + '" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-      } else {
-        document.getElementById("player").innerHTML = "";
-      }
+    function playMusic(url) {
+      document.getElementById("player").innerHTML = 
+        `<iframe width="300" height="200" src="${url}" 
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
     }
   </script>
 </body>
